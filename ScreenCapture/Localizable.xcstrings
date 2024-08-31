@@ -166,6 +166,24 @@
         }
       }
     },
+    "Network disconnected" : {
+      "comment" : "网络未连接",
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Network disconnected"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "网络未连接"
+          }
+        }
+      }
+    },
     "Please enter server token:" : {
       "comment" : "请输入Token",
       "localizations" : {
@@ -503,9 +521,6 @@
           }
         }
       }
-    },
-    "网络未连接" : {
-
     }
   },
   "version" : "1.0"

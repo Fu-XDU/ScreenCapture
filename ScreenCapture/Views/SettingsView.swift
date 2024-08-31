@@ -59,7 +59,7 @@ struct SettingsGeneralView: View {
                             .fill(Color.yellow)
                             .frame(width: 10, height: 10)
 
-                        Text("网络未连接")
+                        Text(NSLocalizedString("Network disconnected", comment: "网络未连接"))
                     } else {
                         Circle()
                             .fill(Color.red)
