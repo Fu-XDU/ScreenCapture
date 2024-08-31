@@ -46,11 +46,27 @@ struct SettingsGeneralView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
-                Circle()
-                    .fill(serverConnected ? Color.green : Color.red)
-                    .frame(width: 10, height: 10)
+                if serverConnected {
+                    Circle()
+                        .fill(Color.green)
+                        .frame(width: 10, height: 10)
 
-                Text(serverConnected ? NSLocalizedString("Service enabled", comment: "服务已启动") : NSLocalizedString("Service disabled", comment: "服务未启动"))
+                    Text(NSLocalizedString("Service enabled", comment: "服务已启动"))
+
+                } else {
+                    if userDefaultsManager.userSettings.serviceOn {
+                        Circle()
+                            .fill(Color.yellow)
+                            .frame(width: 10, height: 10)
+
+                        Text("网络未连接")
+                    } else {
+                        Circle()
+                            .fill(Color.red)
+                            .frame(width: 10, height: 10)
+                        Text(NSLocalizedString("Service disabled", comment: "服务未启动"))
+                    }
+                }
             }
 
             HStack {
@@ -78,10 +94,10 @@ struct SettingsGeneralView: View {
                     webSocketManager.disconnect()
                 } else {
                     userDefaultsManager.userSettings.serviceOn = true
-                    webSocketManager.connect(urlString: userDefaultsManager.userSettings.serviceScheme + "://" + userDefaultsManager.userSettings.serviceURL + "?uuid=" + getMacUUIDHashPrefixN()!)
+                    webSocketManager.connect()
                 }
             }) {
-                Text(serverConnected ? NSLocalizedString("Disable service", comment: "停用服务") : NSLocalizedString("Enable service", comment: "启动服务"))
+                Text(userDefaultsManager.userSettings.serviceOn ? NSLocalizedString("Disable service", comment: "停用服务") : NSLocalizedString("Enable service", comment: "启动服务"))
                     .frame(minWidth: 100)
             }
 

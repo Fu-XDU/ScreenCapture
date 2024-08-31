@@ -9,6 +9,9 @@ import Foundation
 import Starscream
 
 class WebSocketManager: WebSocketDelegate, ObservableObject {
+    var reconnectTimer: Timer?
+    private var pingTimes: Int = 0
+
     @Published var screenCaptureService: ScreenCaptureService = ScreenCaptureService()
     @Published var isConnected: Bool {
         didSet {
@@ -26,13 +29,18 @@ class WebSocketManager: WebSocketDelegate, ObservableObject {
         self.isConnected = isConnected
         self.socket = socket
 
+        connect()
+        startReconnectTimer()
+    }
+
+    func connect() {
         let userSettings = screenCaptureService.userDefaultsManager.userSettings
         if userSettings.serviceOn {
-            connect(urlString: userSettings.serviceScheme + "://" + userSettings.serviceURL + "?uuid=" + getMacUUIDHashPrefixN()!)
+            connectTo(urlString: userSettings.serviceScheme + "://" + userSettings.serviceURL + "?uuid=" + getMacUUIDHashPrefixN()!)
         }
     }
 
-    func connect(urlString: String) {
+    func connectTo(urlString: String) {
         guard let url = URL(string: urlString) else { return }
         var request = URLRequest(url: url)
         request.timeoutInterval = 5
@@ -67,6 +75,8 @@ class WebSocketManager: WebSocketDelegate, ObservableObject {
             if let command = String(data: data, encoding: .utf8) {
                 handleCommand(cmd: command)
             }
+        case .pong(_):
+            pingTimes = 0
         default:
             break
         }
@@ -79,13 +89,39 @@ class WebSocketManager: WebSocketDelegate, ObservableObject {
     // Callbacks
     func onConnected() {
         NSLog("WebSocket connected")
-//        screenCaptureService.startScreenCapture()
     }
 
     func onDisconnected() {
         NSLog("WebSocket disconnected")
         screenCaptureService.userDefaultsManager.userSettings.uploadTestPassed = false
-//        screenCaptureService.stopScreenCapture()
+        if screenCaptureService.userDefaultsManager.userSettings.serviceOn {
+            // Connect Loop
+            pingTimes = 5
+        }
+    }
+
+    func startReconnectTimer() {
+        reconnectTimer?.invalidate() // 防止定时器重复创建
+        reconnectTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { [weak self] _ in
+            guard let self = self else { return }
+            if !screenCaptureService.userDefaultsManager.userSettings.serviceOn {
+                return
+            }
+            if self.pingTimes >= 5 {
+                // may be disconnected
+                NSLog("may be disconnected, reconnect")
+                self.connect()
+            } else {
+                self.socket?.write(ping: Data())
+                self.pingTimes += 1
+                NSLog("ping times: \(pingTimes)")
+            }
+        }
+    }
+
+    func stopReconnectTimer() {
+        reconnectTimer?.invalidate()
+        reconnectTimer = nil
     }
 
     func handleCommand(cmd: String) {
