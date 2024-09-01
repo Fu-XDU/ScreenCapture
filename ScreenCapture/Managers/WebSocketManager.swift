@@ -7,6 +7,7 @@
 
 import Foundation
 import Starscream
+import KeyboardShortcuts
 
 class WebSocketManager: WebSocketDelegate, ObservableObject {
     var reconnectTimer: Timer?
@@ -75,7 +76,7 @@ class WebSocketManager: WebSocketDelegate, ObservableObject {
             if let command = String(data: data, encoding: .utf8) {
                 handleCommand(cmd: command)
             }
-        case .pong(_):
+        case .pong:
             pingTimes = 0
         default:
             break
@@ -114,7 +115,7 @@ class WebSocketManager: WebSocketDelegate, ObservableObject {
             } else {
                 self.socket?.write(ping: Data())
                 self.pingTimes += 1
-                NSLog("ping times: \(pingTimes)")
+//                NSLog("ping times: \(pingTimes)")
             }
         }
     }

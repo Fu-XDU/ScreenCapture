@@ -29,6 +29,23 @@
         }
       }
     },
+    "Capture Screen" : {
+      "comment" : "截屏",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Capture Screen"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "截屏"
+          }
+        }
+      }
+    },
     "Delete local screenshots after successful upload" : {
       "comment" : "上传成功后删除本地截图",
       "localizations" : {
@@ -236,6 +253,7 @@
       }
     },
     "Preferences" : {
+      "comment" : "偏好设置",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -252,6 +270,7 @@
       }
     },
     "Quit" : {
+      "comment" : "退出",
       "localizations" : {
         "en" : {
           "stringUnit" : {
