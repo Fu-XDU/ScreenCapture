@@ -48,7 +48,6 @@ class UserDefaultsManager: ObservableObject {
         userDefaults.set(userSettings.uploadScheme, forKey: UserSettingsKey.uploadScheme)
         userDefaults.set(userSettings.uploadURL, forKey: UserSettingsKey.uploadURL)
         userDefaults.set(userSettings.serviceToken, forKey: UserSettingsKey.serviceToken)
-//        userDefaults.set(userSettings.uploadTestPassed, forKey: UserSettingsKey.uploadTestPassed)
 
         userDefaults.set(userSettings.screenshotDir, forKey: UserSettingsKey.screenshotDir)
         userDefaults.set(userSettings.logDir, forKey: UserSettingsKey.logDir)
@@ -66,7 +65,6 @@ class UserDefaultsManager: ObservableObject {
         userSettings.uploadScheme = userDefaults.string(forKey: UserSettingsKey.uploadScheme) ?? UploadScheme.http
         userSettings.uploadURL = userDefaults.string(forKey: UserSettingsKey.uploadURL) ?? ""
         userSettings.serviceToken = userDefaults.string(forKey: UserSettingsKey.serviceToken) ?? ""
-//        userSettings.uploadTestPassed = userDefaults.bool(forKey: UserSettingsKey.uploadTestPassed)
 
         userSettings.screenshotDir = userDefaults.string(forKey: UserSettingsKey.screenshotDir) ?? userSettings.screenshotDir
         userSettings.logDir = userDefaults.string(forKey: UserSettingsKey.logDir) ?? userSettings.logDir

@@ -29,6 +29,23 @@
         }
       }
     },
+    "Cancel" : {
+      "comment" : "取消",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消"
+          }
+        }
+      }
+    },
     "Capture Screen" : {
       "comment" : "截屏",
       "localizations" : {
@@ -197,6 +214,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "网络未连接"
+          }
+        }
+      }
+    },
+    "OK" : {
+      "comment" : "OK",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "确定"
           }
         }
       }
@@ -468,6 +502,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "登录时启动"
+          }
+        }
+      }
+    },
+    "The stored URL will be cleared" : {
+      "comment" : "所存储的链接将会被清除",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The stored URL will be cleared"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "所存储的链接将会被清除"
           }
         }
       }

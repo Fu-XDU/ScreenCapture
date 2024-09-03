@@ -30,7 +30,7 @@ struct UserSettings {
     var uploadScheme: String = UploadScheme.http
     var uploadURL: String = ""
     var serviceToken: String = ""
-    var uploadTestPassed: Bool = false
+    var uploadTestPassed: Bool = false  // No persistence required
 
     var screenshotDir: String = {
         NSHomeDirectory() + "/Screenshots"
@@ -57,7 +57,6 @@ enum UserSettingsKey {
     static let uploadScheme = "uploadScheme"
     static let uploadURL = "uploadURL"
     static let serviceToken = "serviceToken"
-//    static let uploadTestPassed = "uploadTestPassed"
 
     static let screenshotDir = "screenshotDir"
     static let logDir = "logDir"

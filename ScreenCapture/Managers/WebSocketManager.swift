@@ -51,7 +51,6 @@ class WebSocketManager: WebSocketDelegate, ObservableObject {
     }
 
     func disconnect() {
-//        socket?.disconnect()
         socket?.forceDisconnect()
     }
 
@@ -97,7 +96,7 @@ class WebSocketManager: WebSocketDelegate, ObservableObject {
         screenCaptureService.userDefaultsManager.userSettings.uploadTestPassed = false
         if screenCaptureService.userDefaultsManager.userSettings.serviceOn {
             // Connect Loop
-            pingTimes = 5
+            pingTimes = 2
         }
     }
 
@@ -108,10 +107,11 @@ class WebSocketManager: WebSocketDelegate, ObservableObject {
             if !screenCaptureService.userDefaultsManager.userSettings.serviceOn {
                 return
             }
-            if self.pingTimes >= 5 {
+            if self.pingTimes >= 2 {
                 // may be disconnected
                 NSLog("may be disconnected, reconnect")
                 self.connect()
+                self.pingTimes = 0
             } else {
                 self.socket?.write(ping: Data())
                 self.pingTimes += 1

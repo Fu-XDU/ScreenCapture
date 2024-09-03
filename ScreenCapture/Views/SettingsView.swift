@@ -203,11 +203,14 @@ struct SettingsGeneralView: View {
             }
 
             Button(action: {
-                if serverConnected {
-                    userDefaultsManager.userSettings.serviceOn = false
-                    webSocketManager.disconnect()
+                let ok = dialogOKCancel(question: NSLocalizedString("Reset settings", comment: "重置设置"), text: NSLocalizedString("The stored URL will be cleared", comment: "所存储的链接将会被清除"))
+                if ok {
+                    if serverConnected {
+                        userDefaultsManager.userSettings.serviceOn = false
+                        webSocketManager.disconnect()
+                    }
+                    userDefaultsManager.resetSettings()
                 }
-                userDefaultsManager.resetSettings()
             }) {
                 Text(NSLocalizedString("Reset settings", comment: "重置设置"))
                     .frame(minWidth: 70)

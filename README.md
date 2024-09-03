@@ -23,3 +23,11 @@ ScreenCapture
 ## Screenshot
 
 <img src="./Screenshot/Preferences.png" alt="Preferences" style="zoom:50%;" />
+
+## TODO
+
++ Logging capability, which can be written into different files by day, and the latest log can be viewed directly in the application.
+
+## LICENSE
+
+Apache License

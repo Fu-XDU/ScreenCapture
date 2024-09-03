@@ -93,3 +93,13 @@ func deleteFile(atPath path: String) -> Bool {
         return false
     }
 }
+
+func dialogOKCancel(question: String, text: String) -> Bool {
+    let alert = NSAlert()
+    alert.messageText = question
+    alert.informativeText = text
+    alert.alertStyle = .warning
+    alert.addButton(withTitle: NSLocalizedString("OK", comment: "OK"))
+    alert.addButton(withTitle: NSLocalizedString("Cancel", comment: "取消"))
+    return alert.runModal() == .alertFirstButtonReturn
+}
